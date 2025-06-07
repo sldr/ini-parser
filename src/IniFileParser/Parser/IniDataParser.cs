@@ -108,7 +108,7 @@ namespace IniParser.Parser
                 {
                     var line = lines[lineNumber];
 
-                    if (line.Trim() == String.Empty) continue;
+                    if (!Configuration.AllowBlankLines && line.Trim() == String.Empty) continue;
 
                     try
                     {
@@ -187,6 +187,11 @@ namespace IniParser.Parser
         /// </returns>
         protected virtual bool LineContainsAComment(string line)
         {
+            if (Configuration.AllowBlankLines)
+            {
+                if (string.IsNullOrEmpty(line))
+                    return true;
+            }
             return !string.IsNullOrEmpty(line) 
                 && Configuration.CommentRegex.Match(line).Success;
         }
@@ -232,6 +237,11 @@ namespace IniParser.Parser
         /// </returns>
         protected virtual string ExtractComment(string line)
         {
+            if (Configuration.AllowBlankLines && string.IsNullOrEmpty(line))
+            {
+                _currentCommentListTemp.Add(null);
+                return String.Empty;
+            }
             string comment = Configuration.CommentRegex.Match(line).Value.Trim();
 
             _currentCommentListTemp.Add(comment.Substring(1, comment.Length - 1));

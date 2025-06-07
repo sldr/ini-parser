@@ -59,6 +59,8 @@ namespace IniParser.Model.Configuration
             AllowCreateSectionsOnFly = true;
             ThrowExceptionsOnError = true;
             SkipInvalidLines = false;
+            AllowBlankLines = false;
+            InsertSectionBlankLine = true;
         }
 
         /// <summary>
@@ -74,6 +76,8 @@ namespace IniParser.Model.Configuration
             AllowDuplicateSections = ori.AllowDuplicateSections;
             AllowKeysWithoutSection = ori.AllowKeysWithoutSection;
             AllowCreateSectionsOnFly = ori.AllowCreateSectionsOnFly;
+            AllowBlankLines = ori.AllowBlankLines;
+            InsertSectionBlankLine = ori.InsertSectionBlankLine;
 
             SectionStartChar = ori.SectionStartChar;
             SectionEndChar = ori.SectionEndChar;
@@ -285,6 +289,10 @@ namespace IniParser.Model.Configuration
         ///     Defaults to <c>false</c>.
         /// </remarks>
         public bool AllowKeysWithoutValue { get; set; }
+
+        public bool AllowBlankLines { get; set; }
+
+        public bool InsertSectionBlankLine { get; set; }
         #endregion
 
         #region Fields

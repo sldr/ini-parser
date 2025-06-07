@@ -1,3 +1,15 @@
+# SLDR Additions
+
+The following IniParserConfiguration class options were added.
+
+## AllowBlankLines
+
+Added an option in IniParserConfiguration class called "AllowBlankLines" that defaults to false (ie: defaults to original functionality). When set to true, blank lines will be preserved when reading and writing the file. The AllowBlankLines must be set before the INI file is read in. **NOTE:** If this option is true and "InsertSectionBlankLine" is also true, you will find that blank lines will continously be added above all sections for each read write cycle.
+
+## InsertSectionBlankLine
+
+Added an option in IniParserConfiguration class called "InsertSectionBlankLine" that defaults to true (ie: dafaults to original functionality). When set to false, a blank line will NOT be inserted before each section during writing of the file. This option can be modified after the INI file has been read. **NOTE:** If this option is true and "AllowBlankLines" is also true, you will find that blank lines will continously be added above all sections for each read write cycle.
+
 # INI File Parser
 
 A .NET, Mono and Unity3d compatible(*) library for reading/writing INI data from IO streams, file streams, and strings written in C#.

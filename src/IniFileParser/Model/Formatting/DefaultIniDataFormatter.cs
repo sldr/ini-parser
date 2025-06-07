@@ -63,7 +63,7 @@ namespace IniParser.Model.Formatting
         private void WriteSection(SectionData section, StringBuilder sb)
         {
             // Write blank line before section, but not if it is the first line
-            if (sb.Length > 0) sb.Append(Configuration.NewLineStr);
+            if (Configuration.InsertSectionBlankLine && sb.Length > 0) sb.Append(Configuration.NewLineStr);
 
             // Leading comments
             WriteComments(section.LeadingComments, sb);
@@ -105,7 +105,15 @@ namespace IniParser.Model.Formatting
         private void WriteComments(List<string> comments, StringBuilder sb)
         {
             foreach (string comment in comments)
-                sb.Append(string.Format("{0}{1}{2}", Configuration.CommentString, comment, Configuration.NewLineStr));
+            {
+                if (Configuration.AllowBlankLines && comment == null)
+                {
+                    sb.Append(string.Format("{0}", Configuration.NewLineStr));
+                } else
+                {
+                    sb.Append(string.Format("{0}{1}{2}", Configuration.CommentString, comment, Configuration.NewLineStr));
+                }
+            }
         }
         #endregion
         
